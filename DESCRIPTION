@@ -2,13 +2,11 @@ Package: svgplots
 Version: 0.0.1
 Date: 2016-03-08
 Title: SVG Plots 
-Authors@R: c(person("Richard", "Leu", role = c("aut", "cre"),
-email = "rhleu@utexas.edu"))
+Authors@R: c(person("Richard", "Leu", role = c("aut", "cre"), email = "rhleu@utexas.edu"))
 Author: Richard [aut, cre]
 Maintainer: Richard Leu <rhleu@utexas.edu>
 Depends: R (>= 3.1.0)
-Suggests: 
 Description: Creates plots in SVG format that are streamlined and ready for CSS/Javascript manipulation
-License: GPL (>= 3)
+License:  GPL-3 | file LICENCE
 URL: https://github.com/lxy009/svgplots
 BugReports: https://github.com/lxy009/svgplots/issues
