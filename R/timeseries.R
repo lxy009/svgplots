@@ -2,23 +2,22 @@
 
 
 svg_ts <- function(ys, labels = NULL){
-  #make dimensions
-  ranges <- list(y = 1.04*diff(range(ys)), x = length(ys)+1)
-  extend <- 0.04*diff(range(ys))
-  windows <- list(ymin = min(ys)-extend, ymax = max(ys)+extend, xmin = 0, xmax = length(ys)+1)
+
+  #build window and mapping
+  y_window <- calculate_window(ys)  
+  x_window <- list(min = 0, max = length(ys)+1, range = length(ys)+1)
+  x_map <- make_x_mapping(x_window)
+  y_map <- make_y_mapping(y_window)
   
-  x_ticks <- x_axis_ticks(ranges$x, labels)
+  #ticks
+  y_ticks <- find_ticks(y_window, y_map)
+  #special function for time series data
+  x_ticks <- x_axis_ticks(x_window$range, labels)
   
-  #make mapping
-  x_map <- function(old_x){
-    return((old_x - windows$xmin)/ranges$x)
-  }
-  y_map <- function(old_y){
-    return((ranges$y - (old_y - windows$ymin))/ranges$y)
-  }
-  
-  return(list(points = list(x = x_map(1:length(ys)), y = y_map(ys)),
-              x_tick_ats = x_map(x_ticks$to_tick), x_tick_labels = x_ticks$to_label))
+  return(list(points = list(x = x_map(1:length(ys)), y = y_map(ys), hover = ys),
+              lines = list(x = x_map(1:length(ys)),  y = y_map(ys)),
+              x_tick_ats = x_map(x_ticks$to_tick), x_tick_labels = x_ticks$to_label,
+              y_tick_ats = y_ticks$ticks, y_tick_labels = y_ticks$labels))
 }
 
 
@@ -30,11 +29,11 @@ x_axis_ticks <- function(x_range, labels = NULL){
   to_tick <- to_tick[to_tick != 0]
   to_tick <- to_tick[to_tick <= x_range]
   
-  idx <- which(xs %in% to_tick)
+  idx <- which(xs %in% to_tick)-1
   if(!is.null(labels)){
     to_label <- labels[idx]
   }else{
-    to_label <- NULL
+    to_label <- xs[idx+1]
   }
   
   return(list(to_tick = to_tick, to_label = to_label))

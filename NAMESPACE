@@ -1,8 +1,7 @@
 
-export(svg_par, svg_par_instance, test1, svg_ts, svg_par_points, make_svg_points, make_svg_instance, make_axes_lines,
-       x_axis_ticks, make_ticks_and_labels)
-
-
-
+export(svg_par, svg_par_instance, test1, svg_ts, svg_par_points, make_svg_points, make_svg_lines, make_svg_instance, 
+       make_axes_lines,
+       x_axis_ticks, make_x_ticks_and_labels, make_y_ticks_and_labels, calculate_window, make_x_mapping, make_y_mapping, 
+       find_ticks)
 
 

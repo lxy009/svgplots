@@ -4,7 +4,7 @@ svg_par_instance <- list(
   units = 'px',
   width = 400,
   height = 300,
-  font_size = 16,
+  font_size = 30,
   margin = c(5.1,4.1, 4.1, 2.1)
 )
 
