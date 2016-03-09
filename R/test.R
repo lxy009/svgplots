@@ -19,3 +19,16 @@ test1 <- function(){
   viewer(tmpfile)
 }
 
+test2 <- function(){
+  # svg_par_instance$font_size <- 20
+  test_data <- c(26, 23, 27, 13, 21, 18, 9, 8)
+  test_labels<- c('JAN', 'FEB','MAR', 'APR', 'MAY', 'JUN','JUL','AUG')
+  svg_content <- make_svg_instance(svg_bar(test_data,test_labels),1600,900, styles = 'default')
+  tmpfile <- paste0(tempfile(),'.html')
+  conn <- file(tmpfile)
+  writeLines(paste('<html>','<head>','</head>','<body>','<div style="height:300px;width:533px;">',svg_content,"</div>","</body>","</html>",sep="\n"), conn)
+  close(conn)
+  # svg_par_instance$font_size <- 16
+  viewer(tmpfile)
+}
+
