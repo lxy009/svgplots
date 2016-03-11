@@ -1,9 +1,13 @@
 
-svg_bar <- function(ys, labels = NULL){
+svg_bar <- function(ys, labels = NULL, spacing = 0.2){
+  
+  N_bars <- length(ys)
   
   #build window and mapping
   y_window <- list(min = 0, max = 1.04*max(ys), range = 1.04*max(ys))
-  x_window <- list(min = 0, max = length(ys)+1, range = length(ys)+1)
+  # length(ys) * bar_width + (length(ys)+1) * spacing * bar_width = 1
+  bar_width <- 1/(N_bars + ((N_bars+1) * spacing))
+  x_window <- list(min = 0.5, max = N_bars + 0.5, range =  N_bars)
   x_map <- make_x_mapping(x_window)
   y_map <- make_y_mapping(y_window)
   
@@ -12,9 +16,10 @@ svg_bar <- function(ys, labels = NULL){
   #special function for time series data
   x_ticks <- bar_x_axis_ticks(x_window$range, labels)
   
-  return(list(bars = list(x = x_map(1:length(ys)), y = y_map(ys), hover = ys),
+  return(structure(list(bars = list(x = x_map(1:length(ys)), y = y_map(ys), hover = ys, 
+                                    bar_width = bar_width),
               x_tick_ats = x_map(x_ticks$to_tick), x_tick_labels = x_ticks$to_label,
-              y_tick_ats = y_ticks$ticks, y_tick_labels = y_ticks$labels))
+              y_tick_ats = y_ticks$ticks, y_tick_labels = y_ticks$labels), class='svg_template'))
 }
 
 bar_x_axis_ticks <- function(x_range, labels = NULL){
@@ -23,7 +28,7 @@ bar_x_axis_ticks <- function(x_range, labels = NULL){
   to_tick <- pretty(xs)
   to_tick <- to_tick[to_tick%%1 == 0] #no decimals
   to_tick <- to_tick[to_tick != 0]
-  to_tick <- to_tick[to_tick < x_range]
+  to_tick <- to_tick[to_tick <= x_range]
   
   idx <- which(xs %in% to_tick)-1
   if(!is.null(labels)){
