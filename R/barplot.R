@@ -23,7 +23,7 @@ bar_x_axis_ticks <- function(x_range, labels = NULL){
   to_tick <- pretty(xs)
   to_tick <- to_tick[to_tick%%1 == 0] #no decimals
   to_tick <- to_tick[to_tick != 0]
-  to_tick <- to_tick[to_tick <= x_range]
+  to_tick <- to_tick[to_tick < x_range]
   
   idx <- which(xs %in% to_tick)-1
   if(!is.null(labels)){

@@ -64,7 +64,7 @@ make_svg_bars <- function(rel_coods, width, height, svg_class = NULL, style = NU
   
   #hardcode svg bar margin
   bar_margin <- 0.2
-  bar_width <- (1-bar_margin)*((width-(font_size*(margin[2]+margin[4])))/length(rel_coods$x)) 
+  bar_width <- (1-bar_margin)*((width-(font_size*(margin[2]+margin[4])))/(length(rel_coods$x)+1)) 
   bar_height <- (1 - rel_coods$y) *(height - (font_size*(margin[1]+margin[3])))
   
   svg_coods_xs <- (rel_coods$x * (width  - (font_size*(margin[2]+margin[4])) ) ) + svg_par_instance$margin[2]*font_size
