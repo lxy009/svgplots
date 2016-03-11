@@ -5,7 +5,7 @@ Title: SVG Plots
 Authors@R: c(person("Richard", "Leu", role = c("aut", "cre"), email = "rhleu@utexas.edu"))
 Author: Richard [aut, cre]
 Maintainer: Richard Leu <rhleu@utexas.edu>
-Depends: R (>= 3.1.0)
+Depends: R (>= 3.1.0), rstudioapi
 Description: Creates plots in SVG format that are streamlined and ready for CSS/Javascript manipulation
 License:  GPL-3 | file LICENCE
 URL: https://github.com/lxy009/svgplots

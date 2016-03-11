@@ -32,3 +32,13 @@ test2 <- function(){
   viewer(tmpfile)
 }
 
+test3 <- function(){
+  test_data <- c(26, 23, 27, 13, 21, 18, 9, 8)
+  test_labels<- c('JAN', 'FEB','MAR', 'APR', 'MAY', 'JUN','JUL','AUG')
+  res1 <- svg_bar(test_data, test_labels)
+  print(res1)
+  plot(res1)
+  res2 <- dev_make_svg_bars(res1$bars, 1600, 900, svg_par_instance$margin, svg_par_instance$font_size)
+  print(res2)
+  view(res2, 1600, 900)
+}

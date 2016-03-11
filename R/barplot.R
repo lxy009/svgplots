@@ -40,3 +40,42 @@ bar_x_axis_ticks <- function(x_range, labels = NULL){
   return(list(to_tick = to_tick, to_label = to_label))
 }
 
+
+dev_make_svg_bars <- function(rel_coods, width, height, margin, font_size, svg_class = NULL, style = NULL){
+  
+  #length by height of plotting window (figure dimension sans margin)
+  svg_win_dim <- c( width - (font_size*(margin[2]+margin[4])), height - (font_size*(margin[1]+margin[3])) )
+  
+  #bar dimensions
+  bar_width <- rel_coods$bar_width * svg_win_dim[1]
+  bar_height <- (1 - rel_coods$y) *svg_win_dim[2]
+  
+  #coordinates for rect element top left corner
+  svg_coods_xs <- (rel_coods$x * svg_win_dim[1]) + (margin[2] * font_size)
+  svg_coods_xs <- svg_coods_xs - (0.5 * bar_width)
+  svg_coods_ys <- (rel_coods$y * svg_win_dim[2]) + (margin[3] * font_size)
+  
+  #return as class = svg_instance_bars
+  to_return <- list()
+  for(i in seq_along(svg_coods_xs)){
+    to_return[[i]] <- list(
+      id = paste0('bar',i),
+      class = svg_class,
+      style = style,
+      x = svg_coods_xs[i],
+      y = svg_coods_ys[i],
+      width = bar_width,
+      height = bar_height[i],
+      hover_text = rel_coods$hover[i],
+      hover_x = svg_coods_xs[i] + (0.5*bar_width),
+      hover_y = svg_coods_ys[i],
+      hover_class = NULL,
+      hover_id = paste0('bar_info',i),
+      hover_font_size = font_size,
+      hover_translate = c(0,-0.02*min(c(width,height)))
+    )
+  }
+  
+  return(structure(to_return, class='svg_instance_bars'))
+}
+
