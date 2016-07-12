@@ -42,3 +42,20 @@ test3 <- function(){
   print(res2)
   view(res2, 1600, 900)
 }
+
+test4 <- function(){
+  ell <- 200
+  x <- svg_gauge(60,0,100)
+  print(x)
+  plot(x)
+  res <- make_svg_gauge(x, ell)
+  res <- paste0(paste0('<svg viewbox = "0 0 ',ell+20,' ',ell+20,'">'),res,"</svg>",collapse="\n")
+  cat(res)
+  tmpfile <- paste0(tempfile(),'.html')
+  conn <- file(tmpfile)
+  writeLines(paste('<html>','<head>','</head>','<body>',
+                   paste0('<div style="height:',ell+20,'px;width:',ell+20,'px;">'),
+                          res,"</div>","</body>","</html>",sep="\n"), conn)
+  close(conn)
+  viewer(tmpfile)
+}
