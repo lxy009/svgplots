@@ -59,3 +59,42 @@ test4 <- function(){
   close(conn)
   viewer(tmpfile)
 }
+
+test5 <- function(){
+  test_data <- c(33.60, 34.80, 69.60, 78.00, 20.40, 9.60, 25.00, 28.80)
+  test_vol <-  c(1023,  1042,  1201,  1042,  1119,  992,  1301,  1092)
+  test_labels<- c('JAN', 'FEB','MAR', 'APR', 'MAY', 'JUN','JUL','AUG')
+  x <- svg_stock(test_data, labels = test_labels)
+  plot(x)
+  print(x)
+  x <- svg_stock(test_data, test_vol, test_labels)
+  plot(x)
+  print(x)
+#   res <- make_svg_gauge(x, ell)
+#   res <- paste0(paste0('<svg viewbox = "0 0 ',ell+20,' ',ell+20,'">'),res,"</svg>",collapse="\n")
+#   cat(res)
+#   tmpfile <- paste0(tempfile(),'.html')
+#   conn <- file(tmpfile)
+#   writeLines(paste('<html>','<head>','</head>','<body>',
+#                    paste0('<div style="height:',ell+20,'px;width:',ell+20,'px;">'),
+#                    res,"</div>","</body>","</html>",sep="\n"), conn)
+#   close(conn)
+#   viewer(tmpfile) 
+}
+
+test6 <- function(){
+  ell <- 250
+  x <- svg_donut(c(rep('brown',5),rep('blue',3),'green'))
+  plot(x)
+  # print(x)
+  res <- make_svg_donut(x, ell)
+  res <- paste0(paste0('<svg viewbox = "0 0 ',ell+20,' ',ell+20,'">'),res,"</svg>",sep="\n")
+  cat(res)
+  tmpfile <- paste0(tempfile(),'.html')
+  conn <- file(tmpfile)
+  writeLines(paste('<html>','<head>','</head>','<body>',
+                   paste0('<div style="height:',ell+20,'px;width:',ell+20,'px;">'),
+                   res,"</div>","</body>","</html>",sep="\n"), conn)
+  close(conn)
+  viewer(tmpfile)
+}

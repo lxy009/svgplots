@@ -5,7 +5,9 @@ export(svg_par, svg_par_instance, test1, test2, svg_ts,
        x_axis_ticks, make_x_ticks_and_labels, make_y_ticks_and_labels, calculate_window, make_x_mapping, make_y_mapping, 
        find_ticks, plot.svg_template, write_svg_bars, print.svg_instance_bars, view, view.svg_instance_bars,
        dev_make_svg_bars,
-       svg_gauge, make_svg_gauge, test4
+       svg_gauge, make_svg_gauge, test4,
+       svg_stock, test5,
+       svg_donut, svg_donut.default, svg_donut.table, test6
        )
 
 
