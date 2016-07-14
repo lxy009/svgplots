@@ -1,6 +1,23 @@
 
 #svg template class
 
+dev_plot_svg_template <- function(x){
+  plot.new()
+  plot.window(xlim = c(0,1), ylim = c(0,1)) 
+  for(geom in x$geom){
+    if(geom$elem == 'rect'){
+      rect(xleft = geom$x, xright = geom$x + geom$width, 
+           ytop = 1 - geom$y, ybottom = 1-(geom$y+geom$height), col='grey')
+    } 
+  }
+  if(any(names(x) == 'x_axis')){
+    axis(side = 1, at = x$x_axis$x_tick_ats, label = x$x_axis$x_tick_labels)
+  }
+  if(any(names(x) == 'y_axis')){
+    axis(side = 2, at = 1-x$y_axis$y_tick_ats, label = x$y_axis$y_tick_labels)
+  }
+}
+
 plot.svg_template <- function(x){
   plot.new()
   plot.window(xlim = c(0,1), ylim = c(0,1))

@@ -5,7 +5,7 @@ svg_par <- list(
   'height' = 600
 )
 
-
+#time series
 test1 <- function(){
   svg_par_instance$font_size <- 20
   test_data <- c(33.60, 34.80, 69.60, 78.00, 20.40, 9.60, 25.00, 28.80)
@@ -19,6 +19,7 @@ test1 <- function(){
   viewer(tmpfile)
 }
 
+#bar charts
 test2 <- function(){
   # svg_par_instance$font_size <- 20
   test_data <- c(26, 23, 27, 13, 21, 18, 9, 8)
@@ -30,6 +31,9 @@ test2 <- function(){
   close(conn)
   # svg_par_instance$font_size <- 16
   viewer(tmpfile)
+  
+  #test 2b
+  
 }
 
 test3 <- function(){
@@ -97,4 +101,17 @@ test6 <- function(){
                    res,"</div>","</body>","</html>",sep="\n"), conn)
   close(conn)
   viewer(tmpfile)
+}
+
+test7 <- function(){
+  test_data <- c(33.60, 34.80, 69.60, 78.00, 20.40, 9.60, 25.00, 28.80)
+  test_labels<- c('JAN', 'FEB','MAR', 'APR', 'MAY', 'JUN','JUL','AUG')
+  barplot(height = test_data, names.arg = test_labels)
+  template <- dev_svg_barplot(test_data, test_labels)
+  print(template)
+  dev_plot_svg_template(template)
+  instance <- make_svg_instance(x = template, width = 400, height = 300)
+  print(instance[-1])
+  cat(dev_write_svg_instance(instance))
+  dev_view_svg_instance(instance)
 }

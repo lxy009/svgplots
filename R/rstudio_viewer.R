@@ -1,6 +1,33 @@
 
 view <- function(x, ...) UseMethod("view")
 
+view.svg_instance <- function(x){
+  html_code <- paste("<!DOCTYPE html><html><head><title>svg view</title></head><body>",
+                     x,
+                     "</body></head>",
+                     sep="\n")
+  tmpfile <- paste0(tempfile(),".html")
+  conn <- file(tmpfile)
+  writeLines(html_code, conn)
+  close(conn)
+  #view
+  viewer(tmpfile)
+}
+
+dev_view_svg_instance <- function(x){
+  html_code <- paste("<!DOCTYPE html><html><head><title>svg view</title></head><body>",
+                     paste0("<div style='width:",x$width,"px;height:",x$height,"px;'>"),
+                     dev_write_svg_instance(x),
+                     "</div></body></head>",
+                     sep="\n")
+  tmpfile <- paste0(tempfile(),".html")
+  conn <- file(tmpfile)
+  writeLines(html_code, conn)
+  close(conn)
+  #view
+  viewer(tmpfile)
+}
+
 view.svg_instance_bars <- function(x, width, height){
   #make svg code
   svg_bar_code <- write_svg_bars(x)
