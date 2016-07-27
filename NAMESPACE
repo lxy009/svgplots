@@ -11,6 +11,6 @@ export(svg_par, svg_par_instance, test1, test2, svg_ts,
        view.svg_instance, dev_make_svg_bars2, make_svg_instance, dev_write_svg_instance, dev_view_svg_instance
        )
 
-export(dev_svg_barplot, test7, dev_plot_svg_template )
+export(dev_svg_barplot, test7, dev_plot_svg_template, make_svg_donut )
 
 
