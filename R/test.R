@@ -101,6 +101,20 @@ test6 <- function(){
                    res,"</div>","</body>","</html>",sep="\n"), conn)
   close(conn)
   viewer(tmpfile)
+  
+  x <- svg_donut(c(rep('brown',5),rep('blue',3),'green'), col_map = c('brown'='brown','blue'='blue','green'='green'))
+  plot(x)
+  # print(x)
+  res <- make_svg_donut(x, ell)
+  res <- paste0(paste0('<svg viewbox = "0 0 ',ell+20,' ',ell+20,'">'),res,"</svg>",sep="\n")
+  cat(res)
+  tmpfile <- paste0(tempfile(),'.html')
+  conn <- file(tmpfile)
+  writeLines(paste('<html>','<head>','</head>','<body>',
+                   paste0('<div style="height:',ell+20,'px;width:',ell+20,'px;">'),
+                   res,"</div>","</body>","</html>",sep="\n"), conn)
+  close(conn)
+  viewer(tmpfile)
 }
 
 test7 <- function(){

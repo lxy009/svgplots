@@ -75,7 +75,11 @@ plot.svg_template <- function(x){
       N <- 1E3
       thetas_beg <- c(0,cumsum(head(x$donut$angles,-1)))
       thetas_end <- cumsum(x$donut$angles)
-      my_col <- rainbow(length(thetas_beg))
+      if(any(names(x$donut) == 'col')){
+        my_col <- x$donut$col
+      }else{
+        my_col <- rainbow(length(thetas_beg))
+      }
       r1 <- x$donut$r[1]
       r2 <- x$donut$r[2]
       for(i in seq_along(thetas_beg)){
